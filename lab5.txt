@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <locale.h>
+#define _USE_MATH_DEFINES
+#include<math.h>
+
+int task()
+{
+	setlocale(LC_CTYPE, "RUS");
+    #define M_PI 3.14159265358979323846
+	double gr, rd, sin1;
+
+	printf("Введите угол в градусах: ");
+	scanf("%lf", &gr);
+
+	rd = gr * (M_PI/180);
+	sin1 = sin(rd);
+
+	printf("Синус угла %.lf градусов: %.6lf\n", gr, sin1);
+
+	//30 град = 0.500000
+	//60 град = 0.866025
+	//90 град = 1.000000
+
+
+}
+void main()
+{
+	task();
+}
