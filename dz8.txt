@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<locale.h>
+
+
+int task2()
+{
+	//вариант 11
+	double step, y;
+	printf("Введите значение шага: ");
+	scanf("%lf", &step);
+	printf("\tx\t\t   y\n");
+	for (double x = 1.3; x <= 3.14; x += step) {
+		printf("|\t%.1lf\t|\t%.5lf\t|\n", x, 5 * (pow(x), 3) + 2 * (pow(x), 2) - 15 * x - 6);
+	}
+}
+int dz()
+{
+    printf("\n");
+    int a, n;
+    double res = 1;
+    printf("Введите значение a: ");
+    scanf("%d", &a);
+    printf("Введите значение n: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i <= n + 1; i++) {
+        res = res * (a + i);
+    }
+
+    printf("Результат: %lf\n", res);
+}
+
+void main()
+{
+	setlocale(LC_CTYPE, "RUS");
+    task2();
+    dz();
+}
