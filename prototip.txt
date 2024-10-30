@@ -1,0 +1,26 @@
+//variant E14
+#include<stdio.h>
+#include<locale.h>
+// Пороговые значения температуры
+#define MAX_TEMP 10
+#define MIN_TEMP 0 
+#define CAMERA 5 
+int main()
+{
+	setlocale(LC_CTYPE, "RUS");
+	int id, temperature;
+	printf("Введите данные в формате ID-значение температуры для %d камер(ы): \n", CAMERA);
+	for (int i = 0; i < CAMERA; i++) {
+		printf("Введите данные для камеры %d: \n", i + 1);
+		scanf("%d-%d", &id, &temperature);
+		if (temperature < MIN_TEMP) {
+			printf("Камера %d: Температура вне диапазона\n", id);
+		}
+		else if (temperature > MAX_TEMP) {
+			printf("Камера %d: Температура вне диапазона\n", id);
+		}
+		else if (temperature <=MAX_TEMP && temperature >=MIN_TEMP) {
+			printf("Камера %d: Температура в норме\n", id);
+		}
+	}
+}
