@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include<locale.h>
+#include <stdlib.h>
+#define N 1000 
+
+double* full_elements(double* ptr_array, int n);
+int put_elements(double* ptr_array, int n);
+double* calc_elements(double* ptr_array, int n);
+double sum_elements(double* ptr_array, int begin, int end);
+int find_max(double* ptr_array, int n, int A);
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+    double array[N];
+    int size;
+
+    printf("Введите размер массива > ");
+    scanf("%d", &size);
+
+    full_elements(array, size);
+    put_elements(array, size);
+    calc_elements(array, size);
+
+    int begin, end;
+    printf("\nВведите начальный индекс для суммы: ");
+    scanf("%d", &begin);
+    printf("Введите конечный индекс для суммы: ");
+    scanf("%d", &end);
+    if (begin < 0 || end >= size || begin > end) {
+        printf("Ошибка");
+    }
+    else {
+        double sum = sum_elements(array, begin, end);
+        printf("Сумма элементов от индекса %d до %d: %.2lf\n", begin, end, sum);
+    }
+
+
+    //dz
+    int A=10;
+    int res = find_max(array, size, A);
+    if (res != -1) {
+        printf("Максимальное по модулю значение, не равное %d: %d\n", A, res);
+    }
+}
+
+
+// 8 lab 2 zadanie
+double* full_elements(double* ptr_array, int n) {
+    for (int i = 0; i < n; i++) {
+        float x = 0 + i ; 
+        ptr_array[i] = 5 * x * x * x + 2 * x * x - 15 * x - 6;
+    }
+}
+
+int put_elements(double* ptr_array, int n) {
+    printf("Элементы массива: ");
+    for (int i = 0; i < n; i++) {
+        printf("%.2f ", ptr_array[i]);
+    }
+    printf("\n");
+}
+
+//Удвоить значение каждого элемента
+double* calc_elements(double* ptr_array, int n) {
+    printf("Обработанные элементы массива: ");
+    for (int i = 0; i < n; i++) {
+        ptr_array[i] *= 2; 
+        printf("%.2f ", ptr_array[i]);
+    }
+}
+
+double sum_elements(double* ptr_array, int begin, int end) {
+    double sum = 0;
+    for (int i = begin; i <= end; i++) {
+        sum += ptr_array[i];
+    }
+    return sum;
+}
+
+//dz Поиск максимального по модулю значения, не равного заданному А
+int find_max(double* ptr_array, int n, int A) {
+    int max = -1;
+    for (int i = 1; i < n; i++) {
+        if (ptr_array[i] != A) {
+            int modul = abs(ptr_array[i]);
+            if (modul > max) {
+                max = modul;
+            }
+        }
+    }
+    return max; 
+}
