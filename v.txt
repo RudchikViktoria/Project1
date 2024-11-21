@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+double* ptr_array;
+double* full_elements(double* ptr_array, int n);
+double* calc_elements(double* ptr_array, int n);
+int put_elements(double* ptr_array, int n);
+int main()
+{
+	setlocale(LC_CTYPE, "RUS");
+	double* ptr_array;
+	int size;
+	printf("Введите размер массива: ");
+	scanf("%d", &size);
+	ptr_array = (double*)malloc(size * sizeof(double));
+	if (ptr_array == NULL) {
+		puts("error");
+		return -1;
+	}
+	printf("\nИсходный массив:\n");
+	full_elements(ptr_array, size);
+	put_elements(ptr_array, size);
+	printf("\nОбработанный массив:\n");
+	calc_elements(ptr_array, size);
+	put_elements(ptr_array, size);
+}
+
+double* full_elements(double* ptr_array, int n) { //заполнение элемента массивами
+	for (int i = 0; i < n; i++) {
+		float x = 0 + i;
+		ptr_array[i] = 5 * pow(x, 3) + 2 * pow(x, 2) - 15 * x - 6;
+	}
+	return ptr_array;
+}
+
+//Удвоить значение каждого элемента
+double* calc_elements(double* ptr_array, int n) {
+	for (int i = 0; i < n; i++) {
+		ptr_array[i] *= 2;
+	}
+	return ptr_array;
+}
+int put_elements(double* ptr_array, int n) {
+	for (int i = 0; i < n; i++) {
+		printf("%.2f\n", ptr_array[i]);
+	}
+	return 0;
+
+}
