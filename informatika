@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+int main()
+{
+	setlocale(LC_CTYPE, "RUS");
+	double a, b, d, k;
+	int c;
+	puts("Введите значения первого выражения:");
+	scanf("%lf", &a);
+	scanf("%lf", &b);
+	scanf("%lf", &d);
+
+	puts("Введите значения второго выражения:");
+	scanf("%d", &c);
+	scanf("%lf", &k);
+
+	printf("Значения выражений с большим количеством десятичных знаков:\n");
+	double x = a / b;
+	double y = sqrt(c);
+	printf("%lf/%lf = %lf\nsqrt(%d) = %lf", a, b, x, c, y);
+
+	printf("\nПредельные абсолютные погрешности, округляя их с избытком:\n");
+	double z = x - d;
+	double m = y - k;
+	printf("%lf\n%lf", z, m);
+
+	printf("\nПредельные относительные погрешности составляют в %%:\n");
+	double n = (z / x) * 100;
+	double t = (m / y) * 100;
+	printf("%lf\n%lf", n, t);
+
+	if (n > t) {
+		printf("\nЗначит, более точное выражение: %.3lf/%.3lf = %lf", a, b, d);
+	}
+	else {
+		printf("Значит, более точное выражение: sqrt(%d) = %lf", c, k);
+	}
+}
