@@ -1,0 +1,92 @@
+#include <iostream>
+#include <cmath>
+#include <locale>
+using namespace std;
+#define PI 3.14
+#define EPSILON 0.001
+
+void task_1() {
+	
+	double a = 0.5634;
+	double b = 0.3961;
+
+	double sin_a = sin(a + PI);
+	double cos_b1 = cos(b + 2.87);
+	double arctg_ab = atan(sin_a / cos_b1);
+
+	double cos_b = cos(b);
+	double sqrt_1 = sqrt(a + pow(cos_b, 2));
+
+	double result = arctg_ab / sqrt_1;
+
+	std::cout << "Частное деления arctg(sin(a + PI) / cos(b + 2,87)) на sqrt(a + cos^2b) равно " << result << std::endl;
+}
+
+double calc(double x) {
+
+	double first = x;
+	int n = 1;
+	double rez = 0.0;
+	while (fabs(first) > EPSILON) {
+		rez = rez + first;
+		n++;
+		first = pow(-1, n - 1) * pow(x, n) / n;
+	}
+	return rez;
+}
+int task_2() {
+
+	double x1 = 0.1;
+	double x2 = 0.8;
+	double x3 = -0.62;
+
+	double fx1 = calc(x1);
+	double fx2 = calc(x2);
+	double fx3 = calc(x3);
+
+	std::cout << "Значение F(x) для x1 = " << x1 << " равно " << fx1 << std::endl;
+	std::cout << "Значение F(x) для x2 = " << x2 << " равно " << fx2 << std::endl;
+	std::cout << "Значение F(x) для x3 = " << x3 << " равно " << fx3 << std::endl;
+
+	return 0;
+}
+
+void task_4() {
+	int num;
+	cout << "Введите число: ";
+	cin >> num;
+
+	if (num > 0 && num < 5) {
+		cout << "Число входит в диапазон от 0 до 5" << endl;
+	}
+	else {
+		cout << "Число вне диапазона от 0 до 5" << endl;
+	}
+}
+
+
+int main()
+{
+	setlocale(LC_ALL, "RUS");
+	int choice;
+	cout << "1. Задача 1 (Найти значение алгебраического выражения)" << endl;
+	cout << "2. Задача 2 (Вычисление функции F(x))" << endl;
+	cout << "3. Задача 4 ( Проверка диапазона)" << endl;
+	cout << "0. Выход" << endl;
+	cout << "Ваш выбор: ";
+	cin >> choice;
+	switch (choice) {
+	case 1:
+		cout << "Задача 1 (Найти значение алгебраического выражения)" << endl;
+		task_1();
+		break;
+	case 2:
+		cout << "Задача 2 (Вычисление функции F(x))" << endl;
+		task_2();
+		break;
+	case 3:
+		cout << "Задача 4 ( Проверка диапазона)" << endl;
+		task_4();
+		break;
+	}
+}
