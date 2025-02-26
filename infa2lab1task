@@ -1,0 +1,34 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <locale>
+using namespace std;
+double taylor(double x, double eps, int& terms) {
+	double sum = 1, t = 1;
+	terms = 1; //счетчик слагаемых, первое учтено
+	for (int n = 1; fabs(t) > eps; n++) {
+		t = t * x / n; //вычисление след. слагаемого ряда
+		sum += t;
+		terms++;
+	}
+	return sum;
+}
+int main() {
+	setlocale(LC_ALL, "RUS");
+	double xn = 0, xk = 2, dx = 0.2; //интервал и шаг
+	double eps1 = 0.1, eps2 = 0.000001;
+	cout << fixed << setprecision(6);
+	cout << "  x\t\t  f(x)\t\t   eps1\t\t   f1(x)     count1\t eps2\t\t  f2(x)\t    count2\n";
+	cout << "-----------------------------------------------------------------------------------------------------------\n";
+	for (double x = xn; x <= xk; x += dx) {
+		int t1 = 0, t2 = 0;
+		double ex = exp(x);
+		double f1 = taylor(x, eps1, t1);
+		double f2 = taylor(x, eps2, t2);
+
+		cout << x << "\t " << ex
+			<< "\t " << eps1 << "\t " << f1 << "\t " << t1
+			<< "\t " << eps2 << "\t " << f2 << "\t " << t2 << "\n";
+	}
+	return 0;
+}
