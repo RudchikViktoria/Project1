@@ -1,0 +1,93 @@
+#include <iostream>
+#include <locale>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+//Функция 3 * sin(x) - x^2 + 4 = 0
+double f(double x) {
+	return 3 * sin(x) - x * x + 4;
+}
+
+//Метод дихотомии
+void bisect(double a, double b, double EPS) {
+	if (f(a) * f(b) >= 0) {
+		cout << "На интервале [" << a << ", " << b << "] нет корня или функция не меняет знак." << endl;
+		return;
+	}
+
+	int k = 0; //итерации
+	double c;
+
+	cout << " \nМетод дихотомии на интервале [" << a << ", " << b << "]\n";
+	while ((b - a) >= EPS) {
+		c = (a + b) / 2;
+		k++;
+
+		if (fabs(f(c)) < EPS)
+			break;
+
+		if (f(a) * f(c) < 0)
+			b = c;
+		else
+			a = c;
+	}
+	cout << fixed << setprecision(8);
+	cout << "Корень: " << c << endl;
+	cout << "f(корень): " << f(c) << endl;
+	cout << "Количество итераций: " << k << endl;
+}
+
+//Метод хорд
+void xord(double a, double b, double EPS) {
+	if (f(a) * f(b) >= 0) {
+		cout << "На интервале [" << a << ", " << b << "] нет корня или функция не меняет знак." << endl;
+		return;
+	}
+
+	int k = 0; //итерации
+	double x;
+
+	cout << "\nМетод хорд на интервале [" << a << ", " << b << "]\n";
+	do {
+		x = b - f(b) * (b - a) / (f(b) - f(a));
+		k++;
+
+		if (f(a) * f(x) < 0)
+			b = x;
+		else
+			a = x;
+	} while (fabs(f(x)) > EPS);
+
+	cout << fixed << setprecision(8);
+	cout << "Корень: " << x << endl;
+	cout << "f(корень): " << f(x) << endl;
+	cout << "Количество итераций: " << k << endl;
+}
+
+int main() {
+	setlocale(LC_ALL, "Russian");
+	int choice;
+	double EPS;
+
+	cout << "Введите точность (например, 0.000001): ";
+	cin >> EPS;
+
+	cout << "Выберите метод:\n1. Метод дихотомии\n2. Метод хорд\n";
+	cin >> choice;
+
+	switch (choice) {
+	case 1:
+		bisect(-2, -1, EPS);
+		bisect(2, 2.5, EPS);
+		break;
+	case 2:
+		xord(-2, -1, EPS);
+		xord(2, 2.5, EPS);
+		break;
+	default:
+		cout << "Неверный выбор" << endl;
+	}
+	return 0;
+}
